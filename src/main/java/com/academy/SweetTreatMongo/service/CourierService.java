@@ -7,6 +7,9 @@ import com.academy.SweetTreatMongo.model.Courier;
 import java.util.List;
 
 public interface CourierService {
+//    fetching list of all couriers
+    List<Courier> allCouriers();
+
 // fetching all available couriers in a list in order of increasing price
     List<Courier> listCouriers(String time, double distance, boolean refrigeration);
 

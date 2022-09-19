@@ -38,7 +38,11 @@ public class CourierServiceImpl implements CourierService {
     public CourierServiceImpl(CourierRepository courierRepository) {
         this.courierRepository = courierRepository;
     }
-
+//list all couriers
+    @Override
+    public List<Courier> allCouriers() {
+        return courierRepository.findAll();
+    }
 //    Method for selecting couriers that satisfy customer requirement
     public List<Courier> availableCouriers(String time, double distance, boolean refrigeration) {
         //if available return screenedCouriers else return failMsg;
@@ -47,10 +51,10 @@ public class CourierServiceImpl implements CourierService {
         ArrayList<Courier> screenedCouriers = new ArrayList<>();
 
         for (Courier i : list) {
-            if(refrigeration && orderTime.isAfter(i.getStartTime()) && orderTime.isBefore(i.getEndTime()) &&
+            if(refrigeration && orderTime.isAfter(LocalTime.parse(i.getStartTime())) && orderTime.isBefore(LocalTime.parse(i.getEndTime())) &&
                     i.getIsBoxRefrigerated() && i.getMaxDistance() >= distance) {
                 screenedCouriers.add(i);
-            } else if(!refrigeration && orderTime.isAfter(i.getStartTime()) && orderTime.isBefore(i.getEndTime())
+            } else if(!refrigeration && orderTime.isAfter(LocalTime.parse(i.getStartTime())) && orderTime.isBefore(LocalTime.parse(i.getEndTime()))
                     && i.getMaxDistance() >= distance) {
                 screenedCouriers.add(i);
             }
@@ -58,7 +62,7 @@ public class CourierServiceImpl implements CourierService {
         return screenedCouriers;
     }
 
-//------------ Get operation for the list of couriers in order of price  -------
+    //------------ Get operation for the list of couriers in order of price  -------
     @Override
     public List<Courier> listCouriers(String time, double distance, boolean refrigeration) {
         List<Courier> screenedList = availableCouriers(time, distance, refrigeration);
@@ -141,10 +145,10 @@ public class CourierServiceImpl implements CourierService {
             if (Objects.nonNull(newDetail.getName()) && !"".equalsIgnoreCase(newDetail.getName())) {
                 oldCourier.setName(newDetail.getName()); //updating the name with new name
             }
-            if (Objects.nonNull(newDetail.getStartTime()) && !"".equals(newDetail.getStartTime().toString())) {
+            if (Objects.nonNull(newDetail.getStartTime()) && !"".equals(newDetail.getStartTime())) {
                 oldCourier.setStartTime(newDetail.getStartTime());
             }
-            if (Objects.nonNull(newDetail.getEndTime()) && !"".equals(newDetail.getEndTime().toString())) {
+            if (Objects.nonNull(newDetail.getEndTime()) && !"".equals(newDetail.getEndTime())) {
                 oldCourier.setEndTime(newDetail.getEndTime());
             }
             if (Objects.nonNull(newDetail.getIsBoxRefrigerated())) {

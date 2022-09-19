@@ -21,6 +21,11 @@ public class CourierController {
     public void setCourierService(CourierService courierService) {
         this.courierService = courierService;
     }
+//Fetching all couriers
+    @GetMapping("/couriers")
+    public ResponseEntity<List<Courier>> getAllCouriers(){
+        return new ResponseEntity<>(courierService.allCouriers(), HttpStatus.OK);
+    }
 
 //    Fetching the cheapest courier based on the given criteria
     @GetMapping("/cheapest/{time}/{distance}/{refrigeration}")
