@@ -7,13 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-//import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.time.LocalTime;
 
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
@@ -25,6 +20,7 @@ public class Courier {
     @Id
     private String id;
     @NotBlank(message = "Name must be provided.")
+    @Size(min=3, message = "Name must be of 3 or more characters")
     private String name;
     @NotBlank(message = "A valid start-time must be provided.")
     private String startTime;
@@ -34,7 +30,8 @@ public class Courier {
     private Boolean isBoxRefrigerated;
     @Min(value=1, message = "Max distance must be at least 1.")
     private double maxDistance;
-    @NotNull(message = "Rate must be a positive value.")
+    @NotNull(message = "Rate value must be provided.")
+    @Positive(message = "Rate value must be a positive value.")
     @Field(targetType = DECIMAL128)
     private BigDecimal ratePerMile;
 

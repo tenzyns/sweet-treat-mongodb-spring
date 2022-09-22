@@ -1,18 +1,9 @@
-Sept 19, 2022 6:02:19 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
+Sept 20, 2022 1:46:37 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
 INFO: The list of couriers in order of their price with cheapest 1st: 
-[[Courier: Martin, cost per mile: £1.50 delivers up to 3.0 miles], [Courier: Mike, cost per mile: £1.50 delivers up to 5.5 miles], [Courier: Helen, cost per mile: £1.60 delivers up to 6.0 miles], [Courier: Bobby, cost per mile: £1.75 delivers up to 5.0 miles], [Courier: Geoff, cost per mile: £2 delivers up to 4.5 miles], [Courier: Raj, cost per mile: £3.00 delivers up to 12.0 miles]]
-Sept 19, 2022 6:02:34 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
-WARNING: Unable to select a suitable courier for this order, made at 11:30, for a distance of 7.0 miles, refrigeration requirement: true
-Sept 19, 2022 6:02:42 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
-WARNING: Unable to select a suitable courier for this order, made at 11:30, for a distance of 6.0 miles, refrigeration requirement: true
-Sept 19, 2022 6:02:48 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
-INFO: The list of couriers in order of their price with cheapest 1st: 
-[[Courier: Mike, cost per mile: £1.50 delivers up to 5.5 miles], [Courier: Bobby, cost per mile: £1.75 delivers up to 5.0 miles], [Courier: Geoff, cost per mile: £2 delivers up to 4.5 miles]]
-Sept 19, 2022 6:03:04 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
-INFO: The list of couriers in order of their price with cheapest 1st: 
-[[Courier: Mike, cost per mile: £1.50 delivers up to 5.5 miles]]
-Sept 19, 2022 6:03:21 PM com.academy.SweetTreatMongo.service.CourierServiceImpl listCouriers
-INFO: The list of couriers in order of their price with cheapest 1st: 
-[[Courier: Raj, cost per mile: £3.00 delivers up to 12.0 miles]]
-Sept 19, 2022 6:03:58 PM com.academy.SweetTreatMongo.service.CourierServiceImpl cheapestCourier
-INFO: Most suitable courier for this order is Mike for the request time 11:30 and will cost £7.50
+[[Courier: Martin, cost per mile: £1.50 delivers up to 3.0 miles], [Courier: Helen, cost per mile: £1.60 delivers up to 6.0 miles], [Courier: Geoff, cost per mile: £2 delivers up to 4.5 miles], [Courier: Chris, cost per mile: £2.55 delivers up to 3.0 miles], [Courier: Bernd, cost per mile: £2.75 delivers up to 8.0 miles], [Courier: Raj, cost per mile: £3.00 delivers up to 12.0 miles]]
+Sept 20, 2022 1:46:55 PM com.academy.SweetTreatMongo.service.CourierServiceImpl addCourier
+INFO: New courier Martha has been added successfully to the system.
+Sept 20, 2022 1:47:25 PM com.academy.SweetTreatMongo.service.CourierServiceImpl deleteCourierById
+INFO: Courier with id:6329b63fa2e03d72c2bd1333 has been deleted successfully.
+Sept 20, 2022 1:48:06 PM com.academy.SweetTreatMongo.service.CourierServiceImpl updateCourierById
+INFO: Courier with id:63247f1b41baec03f52f9f93 has their details updated successfully.
