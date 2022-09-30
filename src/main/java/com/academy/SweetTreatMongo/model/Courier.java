@@ -1,6 +1,7 @@
 package com.academy.SweetTreatMongo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -18,16 +19,20 @@ import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128
 public class Courier {
 
     @Id
+    @JsonIgnore //Doesn't show this field when courier object is called for display
     private String id;
     @NotBlank(message = "Name must be provided.")
     @Size(min=3, message = "Name must be of 3 or more characters")
     private String name;
+    @JsonIgnore
     @NotBlank(message = "A valid start-time must be provided.")
     private String startTime;
+    @JsonIgnore
     @NotBlank(message = "A valid end-time must be provided.")
     private String endTime;
     @NotNull(message = "A true or false value must be provided.")
     private Boolean isBoxRefrigerated;
+    @JsonIgnore
     @Min(value=1, message = "Max distance must be at least 1.")
     private double maxDistance;
     @NotNull(message = "Rate value must be provided.")

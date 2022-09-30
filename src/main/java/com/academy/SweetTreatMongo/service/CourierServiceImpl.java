@@ -65,23 +65,27 @@ public class CourierServiceImpl implements CourierService {
     //------------ Get operation for the list of couriers in order of price  -------
     @Override
     public List<Courier> listCouriers(String time, double distance, boolean refrigeration) {
-        List<Courier> screenedList = availableCouriers(time, distance, refrigeration);
-        List<Courier> sortedList;
-
-        if (screenedList.size() == 0) {//if no courier satisfies the requirement
-
-            LOGGER.log(Level.WARNING, "Unable to select a suitable courier for this order, made at " + time + ", for a distance of " + distance + " miles, refrigeration requirement: " + refrigeration);
-
-            throw new CourierNotFoundException("Courier not available for your requirement due to time or distance constraint");
-
-        } else {
-            System.out.println("<---Courier list in order of price ---> ");
-            sortedList = screenedList.stream().sorted(Comparator.comparing(Courier::getRatePerMile)).collect(Collectors.toList());
-            sortedList.forEach(System.out::println);
-
-            LOGGER.log(Level.INFO, "The list of couriers in order of their price with cheapest 1st: \n" + sortedList);
-            return sortedList;
-        }
+        if (refrigeration)
+        return courierRepository.refrigeratedCourierList(time, distance);
+        else
+            return courierRepository.availableCourierList(time, distance);
+//        List<Courier> screenedList = availableCouriers(time, distance, refrigeration);
+//        List<Courier> sortedList;
+//
+//        if (screenedList.size() == 0) {//if no courier satisfies the requirement
+//
+//            LOGGER.log(Level.WARNING, "Unable to select a suitable courier for this order, made at " + time + ", for a distance of " + distance + " miles, refrigeration requirement: " + refrigeration);
+//
+//            throw new CourierNotFoundException("Courier not available for your requirement due to time or distance constraint");
+//
+//        } else {
+//            System.out.println("<---Courier list in order of price ---> ");
+//            sortedList = screenedList.stream().sorted(Comparator.comparing(Courier::getRatePerMile)).collect(Collectors.toList());
+//            sortedList.forEach(System.out::println);
+//
+//            LOGGER.log(Level.INFO, "The list of couriers in order of their price with cheapest 1st: \n" + sortedList);
+//            return sortedList;
+//        }
 
     }
 

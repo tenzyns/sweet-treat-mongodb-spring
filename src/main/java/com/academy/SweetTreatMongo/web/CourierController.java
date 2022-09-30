@@ -48,11 +48,12 @@ public class CourierController {
 //    Fetching the list of couriers who meet the criteria, sorted in order of price
     @GetMapping("/list/{time}/{distance}/{refrigeration}")
     public ResponseEntity<List<Courier>> listCouriers(@PathVariable("time") String time, @PathVariable("distance") double distance, @PathVariable("refrigeration") boolean refrigeration) {
-        try {
-            List<Courier> list = courierService.listCouriers(time, distance, refrigeration);
+
+        List<Courier> list = courierService.listCouriers(time, distance, refrigeration);
+        if (list.size() != 0)
             return new ResponseEntity<>(list, HttpStatus.OK);
-        } catch (CourierNotFoundException exception) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Courier not found!", exception);
+        else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Courier not found!");
         }
     }
 
