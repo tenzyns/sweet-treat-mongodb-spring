@@ -4,6 +4,7 @@ import com.academy.SweetTreatMongo.exception.CourierNotFoundException;
 import com.academy.SweetTreatMongo.model.Courier;
 import com.academy.SweetTreatMongo.service.CourierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -29,13 +30,16 @@ public class CourierController {
 
 //    Fetching the cheapest courier based on the given criteria
     @GetMapping("/cheapest/{time}/{distance}/{refrigeration}")
-    public ResponseEntity<Courier> getCheapestCourier(@PathVariable("time") String time, @PathVariable("distance") double distance, @PathVariable("refrigeration") boolean refrigeration) {
-        try {
-            Courier cheapest = courierService.cheapestCourier(time, distance, refrigeration);
-            return new ResponseEntity<>(cheapest, HttpStatus.OK);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Courier not found", e);
-        }
+    public ResponseEntity<List<Courier>> getCheapestCourier(@PathVariable("time") String time, @PathVariable("distance") double distance, @PathVariable("refrigeration") boolean refrigeration) {
+
+        return new ResponseEntity<>(courierService.cheapestCourier(time, distance, refrigeration), HttpStatus.OK);
+
+        //        try {
+//            Courier cheapest = courierService.cheapestCourier(time, distance, refrigeration);
+//            return new ResponseEntity<>(cheapest, HttpStatus.OK);
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Courier not found", e);
+//        }
     }
 
 //    Registering or creating a new courier

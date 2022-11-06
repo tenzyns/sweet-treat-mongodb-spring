@@ -5,6 +5,7 @@ import com.academy.SweetTreatMongo.model.Courier;
 import com.academy.SweetTreatMongo.repository.CourierRepository;
 import com.academy.SweetTreatMongo.web.CourierController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -91,23 +92,24 @@ public class CourierServiceImpl implements CourierService {
 
 //------------------- Get operation for the cheapest courier -------------
     @Override
-    public Courier cheapestCourier(String time, double distance, boolean refrigeration) {
-        List<Courier> screenedList = availableCouriers(time, distance, refrigeration);
-        int size = screenedList.size();
-        if (size == 0) {
-            LOGGER.log(Level.WARNING, "No courier found for this order with time: " +time + ", delivery distance: " +distance + " miles, refrigeration requirement: " + refrigeration);
-            throw new CourierNotFoundException("Courier not available due to time and/or distance constraint");
-        } else {
-            Courier cheapest = screenedList.get(0);
-            for (int j = 1; j < size; j++) {
-                if (screenedList.get(j).getRatePerMile().compareTo(cheapest.getRatePerMile()) < 0) {
-                    cheapest = screenedList.get(j);
-                }
-            }
-            setCourierCost(BigDecimal.valueOf(distance).multiply(cheapest.getRatePerMile()).setScale(2, RoundingMode.HALF_EVEN));
-            LOGGER.log(Level.INFO, "Most suitable courier for this order is " + cheapest.getName() + " for the request time " + time + " and will cost £" + courierCost);
-            return cheapest;
-        }
+    public List<Courier> cheapestCourier(String time, double distance, boolean refrigeration) {
+        return courierRepository.cheapestCourierRefrigerated(time, distance, 1);
+//        List<Courier> screenedList = availableCouriers(time, distance, refrigeration);
+//        int size = screenedList.size();
+//        if (size == 0) {
+//            LOGGER.log(Level.WARNING, "No courier found for this order with time: " +time + ", delivery distance: " +distance + " miles, refrigeration requirement: " + refrigeration);
+//            throw new CourierNotFoundException("Courier not available due to time and/or distance constraint");
+//        } else {
+//            Courier cheapest = screenedList.get(0);
+//            for (int j = 1; j < size; j++) {
+//                if (screenedList.get(j).getRatePerMile().compareTo(cheapest.getRatePerMile()) < 0) {
+//                    cheapest = screenedList.get(j);
+//                }
+//            }
+//            setCourierCost(BigDecimal.valueOf(distance).multiply(cheapest.getRatePerMile()).setScale(2, RoundingMode.HALF_EVEN));
+//            LOGGER.log(Level.INFO, "Most suitable courier for this order is " + cheapest.getName() + " for the request time " + time + " and will cost £" + courierCost);
+//            return cheapest;
+//        }
     }
 
     private void setCourierCost(BigDecimal cost){
